@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+<!-- Autor : Ariel Duarte -->
+<!-- Date : 26/11/2012 -->
+<!-- Description: Configuracion de reglas de navegacion y administador de Beans de JSF -->
+<navigation-rule>
+	<navigation-case>
+		<from-outcome>login</from-outcome>
+		<to-view-id>/login.jsp</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>/login.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/compra.jsp</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>/compra.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/compra_success.jsp</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+	<from-view-id>/ajuste_stock.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>success</from-outcome>
+		<to-view-id>/ajuste_stock_success.jsp</to-view-id>
+	</navigation-case>
+</navigation-rule>
+
+<managed-bean>
+	<managed-bean-name>compraBackingBean</managed-bean-name>
+	<managed-bean-class>ar.com.jericho.controller.CompraBackingBean</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	<managed-property>
+		<property-name>compraBean</property-name>
+		<value>#{compraBean}</value>
+	</managed-property>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>loginBean</managed-bean-name>
+	<managed-bean-class>ar.com.jericho.controller.LoginBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>compraBean</managed-bean-name>
+	<managed-bean-class>ar.com.jericho.controller.CompraBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>autorizaAjusteStock</managed-bean-name>
+	<managed-bean-class>ar.com.jericho.controller.AjusteAutorizaBackingBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+		<property-name>login</property-name>
+		<value>#{loginBean}</value>
+	</managed-property>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>stockBean</managed-bean-name>
+	<managed-bean-class>ar.com.jericho.controller.StockBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+		<property-name>login</property-name>
+		<value>#{loginBean}</value>
+	</managed-property>
+</managed-bean>
+
+
+<managed-bean>
+	<managed-bean-name>confirmaAjusteStock</managed-bean-name>
+	<managed-bean-class>ar.com.jericho.controller.AjusteConfirmaBackingBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+		<property-name>login</property-name>
+		<value>#{loginBean}</value>
+	</managed-property>
+</managed-bean>
+
+
+<application>
+	<default-render-kit-id>org.apache.myfaces.trinidad.core</default-render-kit-id>
+</application>
+
+<lifecycle>
+<phase-listener>ar.com.jericho.controller.ListenerPhasesJSF</phase-listener>
+</lifecycle>
+
+<converter>
+	<converter-id>stringNull</converter-id>
+	<converter-class>ar.com.jericho.util.StringToNullConverter</converter-class>
+</converter>
+</faces-config>
+

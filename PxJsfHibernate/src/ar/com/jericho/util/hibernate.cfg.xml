@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!--
+    File             	: hibernate.cfg.xml
+    Date             	: 24/10/2012
+    Created by    		: Ariel Duarte
+    Description         : Hibernate configuration for connection to Data Base 
+-->
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dbsiscom</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.c3p0.min_size">1</property>
+    <property name="hibernate.c3p0.max_size">5</property>
+    <property name="hibernate.c3p0.timeout">300</property>
+    <property name="hibernate.c3p0.max_statements">50</property>
+    <property name="hibernate.c3p0.idle_test_period">5</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.jdbc.batch_size">20</property>
+    
+	<!--     Configuracion de Cache de Hibernate para optimizacion de consultas-->
+	<!--     Cache 1º Nivel -->
+	<property name="hibernate.cache.use_query_cache">true</property>
+    <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+    <property name="hibernate.generate_statistics">true</property>
+    <!--     Cache 2º Nivel -->
+    <property name="hibernate.cache.use_second_level_cache">true</property>
+    
+    <property name="hibernate.format_sql">false</property>
+    <property name="hibernate.pool_sizel">10</property>
+    <property name="org.hibernate">true</property>
+    <mapping class="ar.com.jericho.model.bean.Proveedor"/>
+    <mapping class="ar.com.jericho.model.bean.Marca"/>
+    <mapping class="ar.com.jericho.model.bean.Pais"/>
+    <mapping class="ar.com.jericho.model.bean.Grupo"/>
+    <mapping class="ar.com.jericho.model.bean.Ubicacion"/>
+    <mapping class="ar.com.jericho.model.bean.TipoGrupo"/>
+    <mapping class="ar.com.jericho.model.bean.Ciudad"/>
+    <mapping class="ar.com.jericho.model.bean.Articulo"/>
+    <mapping class="ar.com.jericho.model.bean.FormaPago"/>
+    <mapping class="ar.com.jericho.model.bean.CabeceraCompra"/>
+    <mapping class="ar.com.jericho.model.bean.DetalleCompra"/>
+    <mapping class="ar.com.jericho.model.bean.Funcionario"/>
+    <mapping class="ar.com.jericho.model.bean.TipoAjuste"/>
+    <mapping class="ar.com.jericho.model.bean.Ajuste"/>
+  </session-factory>
+</hibernate-configuration>
+

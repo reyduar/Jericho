@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" 
+version="3.0">
+  <display-name>SiscomJavaServerFaces</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description></description>
+    <display-name>HibernateServlet</display-name>
+    <servlet-name>HibernateServlet</servlet-name>
+    <servlet-class>ar.com.jericho.controller.HibernateServlet</servlet-class>
+	<load-on-startup>-1</load-on-startup>
+	
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HibernateServlet</servlet-name>
+    <url-pattern>/HibernateServlet</url-pattern>
+  </servlet-mapping>
+
+
+<context-param>
+	<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+	<param-value>client</param-value>
+	<!--param-value>server</param-value -->
+</context-param>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	
+  <filter>
+	<filter-name>MyFacesExtensionsFilter</filter-name>
+	<filter-class>org.apache.myfaces.webapp.filter.ExtensionsFilter</filter-class>
+	<init-param>
+		<description>Set the size limit for uploaded files.</description>
+		<param-name>maxFileSize</param-name>
+		<param-value>20m</param-value>
+	</init-param>
+</filter>
+
+	<filter-mapping>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>MyFacesExtensionsFilter</filter-name>
+		<url-pattern>/faces/myFacesExtensionResource/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>resources</servlet-name>
+		<servlet-class>org.apache.myfaces.trinidad.webapp.ResourceServlet</servlet-class>
+	</servlet>
+	
+  <servlet-mapping>
+	<servlet-name>resources</servlet-name>
+	<url-pattern>/adf/*</url-pattern>
+</servlet-mapping>
+
+	<filter>
+		<filter-name>trinidad</filter-name>
+		<filter-class>org.apache.myfaces.trinidad.webapp.TrinidadFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>trinidad</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+</web-app>

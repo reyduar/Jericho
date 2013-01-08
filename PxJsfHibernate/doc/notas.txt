@@ -1,0 +1,35 @@
+			<select id="ciu_codigo"	name="ciu_codigo">
+							<%
+								List<Ciudad> ciudades = (List<Ciudad>) request.getAttribute("ciudades");
+								for (Ciudad ciudad : ciudades) {
+									out.println("<option value='" + ciudad.getCodigo() + "'>"
+											+ ciudad.getNombre());
+								}
+							%>
+					</select>
+
+
++595985177 732
+
+
+onmouseover="mostrarEmail(${proveedor.procodigo});"
+					 onmouseout="ocultarEmail(${proveedor.procodigo});"
+
+
+
+
+<div class="rightSideProdcutos" style="display: none;" id="proveedor${proveedor.codigo}">
+			<table>
+				<thead>
+					<tr>
+						<td>Email</td>
+					</tr>
+				</thead>
+
+				<c:forEach var="proveedor" items="${proveedores}">
+					<tr>
+						<td>${proveedor.email}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
