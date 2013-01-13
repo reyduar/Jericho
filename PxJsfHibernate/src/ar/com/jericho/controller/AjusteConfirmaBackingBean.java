@@ -1,6 +1,7 @@
 package ar.com.jericho.controller;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.faces.component.html.HtmlDataTable;
 
@@ -15,13 +16,16 @@ public class AjusteConfirmaBackingBean {
 	private LoginBean login;
 	private HtmlDataTable dataTableConfirmarAjuste;
 	
-	public String confirmarAjusteStock(){
+	public String confirmar(){
 		Ajuste ajusteBean = (Ajuste) dataTableConfirmarAjuste.getRowData();
-		if(ajusteBean.getAjcant_confirmada() <= ajusteBean.getArticulo().getArtstockmin()){
+		if(ajusteBean.getAjcant_confirmada() > ajusteBean.getArticulo().getArtstockmin()){
 			FacesContextUtil.setMessageError("Cantidad solicitada superior a la del Stock");
 			return null;
 		}else if(ajusteBean.getAjcant_confirmada() > ajusteBean.getAjcant_solicitada()){
 			FacesContextUtil.setMessageError("Cantidad de entrega no puede ser superior a la autorizada");
+			return null;
+		}else if(ajusteBean.getAjcant_solicitada() < ajusteBean.getArticulo().getArtstockmin() && ajusteBean.getAjcant_confirmada() < ajusteBean.getAjcant_solicitada()){
+			FacesContextUtil.setMessageError("Cantidad confirmada no puede ser inferior a la solicitada");
 			return null;
 		}
 		
@@ -30,6 +34,12 @@ public class AjusteConfirmaBackingBean {
 		art.setArtstockmin(art.getArtstockmin() - ajusteBean.getAjcant_confirmada());
 		InterfaceDAO<Articulo> artDAO = new HibernateDAO<Articulo>(Articulo.class, FacesContextUtil.getRequestSession());
 		artDAO.actualizar(art);
+		
+		//-- Actualizamos el campo Stock de la Tabla Articulos
+		InterfaceDAO<Ajuste> ajusteStockDAO = new AjusteStockDAO(FacesContextUtil.getRequestSession(), new HibernateDAO<Ajuste>(Ajuste.class, FacesContextUtil.getRequestSession()));
+		ajusteBean.setAjfecha_confirmada(new Date());
+		ajusteBean.setFun_autorizante(login.getUsuario());
+		ajusteStockDAO.actualizar(ajusteBean);
 		return null;
 	}
 	

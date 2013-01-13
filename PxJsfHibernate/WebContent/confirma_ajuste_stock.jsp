@@ -27,7 +27,7 @@
 				<htm:fieldset style="borda">
 					<htm:legend style="legenda">Confirmar Ajustes</htm:legend>
 					<h:form id="baixaEstoque">
-						<t:dataTable value="#{confirmaAjusteStock.getPendientesConfirmar}" var="ajuste"
+						<t:dataTable value="#{confirmaAjusteStock.pendientesConfirmar}" var="ajuste"
 						rowClasses="linhaClara, linhaEscura" styleClass="dataTableProdutos"
 						renderedIfEmpty="false" binding="#{confirmaAjusteStock.dataTableConfirmarAjuste}"
 						>
@@ -51,7 +51,7 @@
 							</t:column>
 							<h:column>
 								<h:commandButton styleClass="panelBotaoConfirmar" value="Confirmar" action="#{confirmaAjusteStock.confirmar}"
-								onclick="return confirm('Confirma a entrega?');"
+								onclick="return confirm('Confirmar Ajuste?');"
 								></h:commandButton>
 							</h:column>
 						</t:dataTable>

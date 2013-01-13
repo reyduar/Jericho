@@ -54,7 +54,7 @@
 						</h:dataTable>
 					</h:form>
 					</htm:fieldset>
-					<htm:fieldset style="borda">
+					<htm:fieldset style="borda" rendered="#{not empty stockBean.articulosSeleccionados}">
 					<htm:legend style="legenda">Articulos Seleccionados</htm:legend>
 					<h:form id="baixaEstoque">
 						<t:dataTable value="#{stockBean.articulosSeleccionados}" var="ajusteStock"
